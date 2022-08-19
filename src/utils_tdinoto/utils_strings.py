@@ -74,3 +74,23 @@ def remove_leading_zeros(input_string: str) -> str:
     out_string = input_string.lstrip('0')
 
     return out_string
+
+
+def str2bool(v: str) -> bool:
+    """This function converts the input string into a boolean
+    Args:
+        v: input argument
+    Returns:
+        True: if the input argument is 'yes', 'true', 't', 'y', '1'
+        False: if the input argument is 'no', 'false', 'f', 'n', '0'
+    Raises:
+        ValueError: if the input argument is none of the above
+    """
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise ValueError('Boolean value expected.')
