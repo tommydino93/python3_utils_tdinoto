@@ -7,3 +7,12 @@ To install it, ensure you have python installed and then run:
 ```python
 python3 -m pip install python3_utils_tdinoto
 ```
+
+### Example usage
+```python
+>>> from utils_tdinoto.utils_lists import find_common_elements
+>>> list_1 = [1, 2, 3]
+>>> list_2 = [3, 4, 5]
+>>> find_common_elements(list_1, list_2)
+[3]
+```
