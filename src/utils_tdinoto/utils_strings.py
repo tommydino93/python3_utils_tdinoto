@@ -1,7 +1,8 @@
 from dateutil.parser import parse
 
 
-def is_date(input_string: str, fuzzy: bool = False) -> bool:
+def is_date(input_string: str,
+            fuzzy: bool = False) -> bool:
     """This function checks whether in the input string there is a date
     Args:
         input_string: string to check for date
@@ -45,7 +46,8 @@ def load_txt_file_as_string(path_txt_file: str) -> str:
     return content
 
 
-def add_leading_zeros(input_string: str, out_len: int) -> str:
+def add_leading_zeros(input_string: str,
+                      out_len: int) -> str:
     """This function adds leading zeros to the input string. The output string will have length == out_len
     Args:
         input_string: the input string

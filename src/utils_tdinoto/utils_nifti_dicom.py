@@ -127,7 +127,8 @@ def read_dcm_series(dcm_dir: str) -> sitk.Image:
     return volume_sitk
 
 
-def get_sitk_volume_info(path_to_nii_or_dcm: str, print_info: bool = False) -> dict:
+def get_sitk_volume_info(path_to_nii_or_dcm: str,
+                         print_info: bool = False) -> dict:
     """This function prints basic info of the input volume
     Args:
         path_to_nii_or_dcm: path to volume that we want to explore

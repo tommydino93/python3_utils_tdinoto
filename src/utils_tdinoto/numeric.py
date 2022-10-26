@@ -1,7 +1,8 @@
 import math
 
 
-def round_half_up(n: float, decimals: float = 0) -> float:
+def round_half_up(n: float,
+                  decimals: int = 0) -> float:
     """This function rounds to the nearest integer number (e.g 2.4 becomes 2.0 and 2.6 becomes 3);
      in case of tie, it rounds up (e.g. 1.5 becomes 2.0 and not 1.0)
     Args:
@@ -17,14 +18,13 @@ def round_half_up(n: float, decimals: float = 0) -> float:
     return rounded_number
 
 
-def print_running_time(start_time: float, end_time: float, process_name: str):
+def print_running_time(start_time: float,
+                       end_time: float, process_name: str) -> None:
     """This function takes as input the start and the end time of a process and prints to console the time elapsed for this process
     Args:
         start_time: instant when the timer was started
         end_time: instant when the timer was stopped
         process_name: name of the process
-    Returns:
-        None
     """
     sentence = str(process_name)  # convert to string whatever the user inputs as third argument
     temp = end_time - start_time  # compute time difference

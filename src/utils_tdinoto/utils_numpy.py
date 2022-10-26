@@ -44,7 +44,9 @@ def is_binary(input_array: np.ndarray) -> bool:
     return array_is_binary
 
 
-def has_values_all_in_range(input_array: np.ndarray, low: int, high: int) -> bool:
+def has_values_all_in_range(input_array: np.ndarray,
+                            low: int,
+                            high: int) -> bool:
     """This function checks whether the input array has values that lie within the range (low, high).
     If yes, it returns True, otherwise it returns False.
     Args:
@@ -64,7 +66,9 @@ def has_values_all_in_range(input_array: np.ndarray, low: int, high: int) -> boo
     return array_is_withing_range
 
 
-def pad_image_to_specified_shape(input_img: np.ndarray, desired_x_dim: int, desired_y_dim: int) -> np.ndarray:
+def pad_image_to_specified_shape(input_img: np.ndarray,
+                                 desired_x_dim: int,
+                                 desired_y_dim: int) -> np.ndarray:
     """This function zero-pads input_img up to the specified shape (desired_x_dim, desired_y_dim)
     Args:
         input_img: input image that we want to pad
@@ -91,3 +95,23 @@ def pad_image_to_specified_shape(input_img: np.ndarray, desired_x_dim: int, desi
     padded_img = np.pad(input_img, pad_width=((a, aa), (b, bb)), mode='constant', constant_values=0)
 
     return padded_img
+
+
+def generate_binary_array_with_exact_proportion(array_len: int,
+                                                nb_zeros: int,
+                                                shuffle: bool = True):
+    """This function creates a 1D binary array with an exact proportion of 0s and 1s.
+    The array will contain exactly nb_zeros 0s, and (array_len - nb_zeros) 1s. By
+    default, the generated array is shuffled.
+    Args:
+        array_len: length of generated array
+        nb_zeros: number of 0s in the generated array (the rest will be 1s)
+        shuffle: whether to shuffle the generated array
+    Returns:
+        generated_binary_array: generated binary array
+    """
+    generated_binary_array = np.array([0] * nb_zeros + [1] * (array_len - nb_zeros))
+    if shuffle:
+        np.random.shuffle(generated_binary_array)
+
+    return generated_binary_array

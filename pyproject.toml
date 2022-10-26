@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python3_utils_tdinoto"
-version = "1.0.1"
+version = "1.0.2"
 description = "Useful wrapper functions for the most common python data types, and for nifti/dicom arrays."
 readme = "README.md"
 authors = [{ name = "Tommaso Di Noto", email = "tommydino@hotmail.it" }]

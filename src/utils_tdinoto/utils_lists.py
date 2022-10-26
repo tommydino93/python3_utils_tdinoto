@@ -7,14 +7,14 @@ from typing import Any, Tuple
 import operator
 
 
-def save_list_to_disk_with_pickle(list_to_save: list, out_dir: str, out_filename: str) -> None:
+def save_list_to_disk_with_pickle(list_to_save: list,
+                                  out_dir: str,
+                                  out_filename: str) -> None:
     """This function saves a list to disk
     Args:
         list_to_save: list that we want to save
         out_dir: path to output folder; will be created if not present
         out_filename: output filename
-    Returns:
-        None
     """
     if not os.path.exists(out_dir):  # if output folder does not exist
         os.makedirs(out_dir)  # create it
@@ -40,7 +40,8 @@ def load_list_from_disk_with_pickle(path_to_list: str) -> list:
     return loaded_list
 
 
-def load_list_from_partial_name_with_glob(input_dir: str, partial_filename: str) -> list:
+def load_list_from_partial_name_with_glob(input_dir: str,
+                                          partial_filename: str) -> list:
     """This function loads a list from disk by knowing only part of the filename
     Args:
         input_dir: directory where list was saved
@@ -58,7 +59,8 @@ def load_list_from_partial_name_with_glob(input_dir: str, partial_filename: str)
     return list_of_interest
 
 
-def find_common_elements(list1: list, list2: list) -> list:
+def find_common_elements(list1: list,
+                         list2: list) -> list:
     """This function takes as input two lists and returns a list with the common elements
     Args:
         list1: first list
@@ -73,7 +75,8 @@ def find_common_elements(list1: list, list2: list) -> list:
     return intersection_as_list
 
 
-def most_frequent_n_elements(input_list: list, n: int) -> Any:
+def most_frequent_n_elements(input_list: list,
+                             n: int) -> Any:
     """This function is given a list as input and it returns its most frequent element
     Args:
         input_list: list where we search the most frequent element
@@ -99,7 +102,8 @@ def flatten_list(list_of_lists: list) -> list:
     return flattened_list
 
 
-def find_difference_list(list1: list, list2: list) -> list:
+def find_difference_list(list1: list,
+                         list2: list) -> list:
     """This function takes as input two lists and returns the difference list between them
     Args:
         list1: first list
@@ -112,7 +116,9 @@ def find_difference_list(list1: list, list2: list) -> list:
     return difference_list
 
 
-def split_list_equal_sized_groups(lst: list, n: int, seed: int = 123) -> list:
+def split_list_equal_sized_groups(lst: list,
+                                  n: int,
+                                  seed: int = 123) -> list:
     """This function splits a list in n approximately equal-sized subgroups
     Args:
         lst: input list that we want to split
@@ -127,7 +133,8 @@ def split_list_equal_sized_groups(lst: list, n: int, seed: int = 123) -> list:
     return out_list
 
 
-def find_indexes_where_lists_differ(list1: list, list2: list) -> list:
+def find_indexes_where_lists_differ(list1: list,
+                                    list2: list) -> list:
     """This function returns the indexes where the two input lists differ. The input lists are expected to have same length
     Args:
         list1: first input list
@@ -142,7 +149,8 @@ def find_indexes_where_lists_differ(list1: list, list2: list) -> list:
     return out_list
 
 
-def extract_unique_elements(lst: list, ordered: bool = True) -> list:
+def extract_unique_elements(lst: list,
+                            ordered: bool = True) -> list:
     """This function extracts the unique elements of the input list (i.e. it removes duplicates)
     and returns them as an output list; if ordered=True (as by default), the returned list is ordered.
     Args:
@@ -159,7 +167,8 @@ def extract_unique_elements(lst: list, ordered: bool = True) -> list:
     return out_list
 
 
-def find_idxs_of_element_in_list(lst: list, element: Any) -> list:
+def find_idxs_of_element_in_list(lst: list,
+                                 element: Any) -> list:
     """This function returns the indexes of the input list that have value == element
     Args:
         lst: input list where we search for indexes
@@ -198,7 +207,7 @@ def list_has_duplicates(input_list: list) -> bool:
     return has_duplicates
 
 
-def first_argmax(input_list) -> int:
+def first_argmax(input_list: list) -> int:
     """This function returns the index of the max value. If there are duplicate max values in input_list,
     the index of the first maximum value found will be returned.
     Args:
@@ -211,7 +220,9 @@ def first_argmax(input_list) -> int:
     return idx_max
 
 
-def shuffle_two_lists_with_same_order(x: list, y: list, chosen_seed: int = 123) -> Tuple[list, list]:
+def shuffle_two_lists_with_same_order(x: list,
+                                      y: list,
+                                      chosen_seed: int = 123) -> Tuple[list, list]:
     """This function shuffles the two input lists with the same order
     Args:
         x: first input list
@@ -232,7 +243,8 @@ def shuffle_two_lists_with_same_order(x: list, y: list, chosen_seed: int = 123) 
     return shuffled_x, shuffled_y
 
 
-def slice_by_index(lst: list, indexes) -> list:
+def slice_by_index(lst: list,
+                   indexes) -> list:
     """Slice list by positional indexes.
     Args:
         lst: list to slice.
@@ -279,7 +291,8 @@ def keep_only_duplicates(input_list: list) -> list:
     return list_only_with_duplicates
 
 
-def check_if_string_is_in_any_item_of_list(input_list: list, match_string: str) -> bool:
+def check_if_string_is_in_any_item_of_list(input_list: list,
+                                           match_string: str) -> bool:
     """This function checks whether match_string is in any of the items of input_list;
     if yes, it returns True, otherwise it returns False.
     Args:
@@ -291,3 +304,15 @@ def check_if_string_is_in_any_item_of_list(input_list: list, match_string: str) 
     list_contains_match_string = bool([item for item in input_list if (match_string in item)])
 
     return list_contains_match_string
+
+
+def all_elements_in_list_are_identical(input_list: list) -> bool:
+    """This function checks whether all the elements in input_list are identical. If they are, True is returned; otherwise, False is returned
+    Args:
+        input_list: input list for which we check that all elements are identical
+    Returns:
+        all_elements_are_identical: bool that indicates whether all elements are identical or not
+    """
+    all_elements_are_identical = all(x == input_list[0] for x in input_list)
+
+    return all_elements_are_identical
