@@ -115,3 +115,17 @@ def generate_binary_array_with_exact_proportion(array_len: int,
         np.random.shuffle(generated_binary_array)
 
     return generated_binary_array
+
+
+def mean_excluding_zeros(input_array: np.ndarray) -> float:
+    """This function computes the mean of non-zero values
+    Args:
+        input_array: input array for which we want to compute the mean
+    Returns:
+        mean_value_excluding_zeros: the arithmetic mean computed neglecting all zero elements
+    """
+    input_array = input_array.astype('float')  # cast array to float
+    input_array[input_array == 0] = np.nan  # set zero values to NaN
+    mean_value_excluding_zeros = np.nanmean(input_array)
+
+    return mean_value_excluding_zeros
