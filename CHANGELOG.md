@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.3 (Feb 14, 2023)
+### Feature
+
+- Added utils_bids_dcm_dataset.py
+- Added utils_dict
+- Added `mean_excluding_zeros` in `utils_numpy`
+- Added `re_orient_to_nib_closest_canonical` and `change_dcm_tags_one_derived_image` in `utils_nifti_dicom` 
+
 ## v1.0.2 (Oct 26, 2022)
 ### Feature
 
