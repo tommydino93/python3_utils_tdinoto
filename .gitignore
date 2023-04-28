@@ -1,3 +1,4 @@
 # Project exclude paths
 /venv/
 /src/python3_utils_tdinoto.egg-info/
+.idea/
