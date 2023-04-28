@@ -129,3 +129,16 @@ def mean_excluding_zeros(input_array: np.ndarray) -> float:
     mean_value_excluding_zeros = np.nanmean(input_array)
 
     return mean_value_excluding_zeros
+
+
+def is_empty(input_array: np.ndarray) -> bool:
+    """This function checks whether the input array is empty.
+    If yes, it returns True, otherwise it returns False.
+    Args:
+        input_array: input array that we want to inspect
+    Returns:
+        array_is_empty: True if input_array is empty; False otherwise
+    """
+    array_is_empty = input_array.size == 0
+
+    return array_is_empty
