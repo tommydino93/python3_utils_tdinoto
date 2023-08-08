@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: python3-utils-tdinoto
-Version: 1.0.4
+Version: 1.0.5
 Summary: Useful wrapper functions for the most common python data types, and for nifti/dicom arrays.
 Author-email: Tommaso Di Noto <tommydino@hotmail.it>
 License: MIT License
