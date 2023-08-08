@@ -99,7 +99,7 @@ def pad_image_to_specified_shape(input_img: np.ndarray,
 
 def generate_binary_array_with_exact_proportion(array_len: int,
                                                 nb_zeros: int,
-                                                shuffle: bool = True):
+                                                shuffle: bool = True) -> np.ndarray:
     """This function creates a 1D binary array with an exact proportion of 0s and 1s.
     The array will contain exactly nb_zeros 0s, and (array_len - nb_zeros) 1s. By
     default, the generated array is shuffled.
@@ -142,3 +142,18 @@ def is_empty(input_array: np.ndarray) -> bool:
     array_is_empty = input_array.size == 0
 
     return array_is_empty
+
+
+def binarize_array(input_array: np.ndarray,
+                   threshold: float = 0.5) -> np.ndarray:
+    """This function binarizes the input array by converting values to either 0 or 1 based on the threshold.
+    Args:
+        input_array (numpy.ndarray or list): The input array to be binarized.
+        threshold: The threshold value to use for binarization. Default is 0.5.
+    Returns:
+        binarized_array: The binarized array.
+    """
+    # Apply binarization using element-wise comparison
+    binarized_array = (input_array >= threshold).astype(int)
+
+    return binarized_array

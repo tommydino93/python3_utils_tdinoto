@@ -5,10 +5,13 @@ import numpy as np
 from utils_tdinoto.utils_strings import keep_only_digits
 import SimpleITK as sitk
 import pandas as pd
+from tqdm import tqdm
 from utils_tdinoto.numeric import round_half_up
+from utils_tdinoto.utils_lists import extract_unique_elements
 
 
-def print_patient_sex_and_age(bids_dir: str, bids_dcm_dir: str) -> None:
+def print_patient_sex_and_age(bids_dir: str,
+                              bids_dcm_dir: str) -> None:
     """This function loops over a pseudo-BIDS dataset dir and prints the patient sex
     Args:
         bids_dir: directory containing the BIDS dataset
@@ -47,7 +50,8 @@ def print_patient_sex_and_age(bids_dir: str, bids_dcm_dir: str) -> None:
     print(f"\nAge: mean={mean_age}, std={std_age}")
 
 
-def print_median_values(df, scanner_name):
+def print_median_values(df: pd.DataFrame,
+                        scanner_name: str) -> None:
     median_tr = df['TR'].median()
     median_te = df['TE'].median()
     median_spacing_x = df['spacing_x'].median()
@@ -57,7 +61,8 @@ def print_median_values(df, scanner_name):
     print(f"\nmedian values {scanner_name}: TR = {round_half_up(median_tr)}, TE = {round_half_up(median_te)}, spacing = {median_spacing_x} x {median_spacing_y} x {median_spacing_z}")
 
 
-def find_mr_acquisition_params(bids_ds, dcm_dir):
+def find_mr_acquisition_params(bids_ds: str,
+                               dcm_dir: str) -> None:
     cnt_subs = 0
     vendor_scanner_field_strength = []
     for sub in sorted(os.listdir(bids_ds)):
@@ -138,12 +143,32 @@ def find_mr_acquisition_params(bids_ds, dcm_dir):
         print_median_values(df_prisma, scanner_name="Prisma")
 
 
+def print_distribution_sessions_bids_dataset(path_bids_ds: str) -> None:
+    all_sub_ses = []
+    for sub in tqdm(sorted(os.listdir(path_bids_ds))):
+        if "sub" in sub and os.path.isdir(os.path.join(path_bids_ds, sub)):
+            cnt_ses = 0
+            for ses in sorted(os.listdir(os.path.join(path_bids_ds, sub))):
+                if "ses" in ses and os.path.isdir(os.path.join(path_bids_ds, sub, ses)):
+                    cnt_ses += 1
+            all_sub_ses.append([sub, cnt_ses])
+
+    df_all_sub_ses = pd.DataFrame(all_sub_ses, columns=['sub', 'ses'])
+
+    # extract the different counts for the number of sessions
+    ses_counts = df_all_sub_ses['ses'].value_counts()
+
+    # print the distribution
+    print()
+    for nb_ses, count in ses_counts.items():
+        print(f"Subjects with {nb_ses} ses: {count}")
+
+
 def main():
     # input args
     path_bids_ds = "/path/to/BIDS_Dataset/"
-    all_dicoms = "/path/to/dir/ALL_DICOMS/"
-    print_patient_sex_and_age(path_bids_ds, all_dicoms)
-    find_mr_acquisition_params(path_bids_ds, all_dicoms)
+    # path_bids_ds = r"Z:\Database\ADNI_Controls_FDA_AI_Letter_BIDS"
+    # print_distribution_sessions_bids_dataset(path_bids_ds)
 
 
 if __name__ == '__main__':

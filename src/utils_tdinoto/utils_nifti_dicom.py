@@ -294,3 +294,29 @@ def change_dcm_tags_one_derived_image(ds: pydicom.dataset.FileDataset,
     # 21) Pixel Data (7FE0, 0010) was already modified in MeVisLab
 
     return ds
+
+
+def dcm2nii_sitk(in_dcm_dir: str,
+                 out_nii_dir: str,
+                 out_name: str) -> None:
+    """This function converts a DICOM sequence to a NIfTI file using SimpleITK.
+    Args:
+        in_dcm_dir: input directory containing the DICOM sequence
+        out_nii_dir: output directory where the NIfTI file will be saved
+        out_name: name of the NIfTI file
+    """
+    # Load DICOM sequence
+    reader = sitk.ImageSeriesReader()  # type: sitk.ImageSeriesReader # create reader
+    dicom_names = reader.GetGDCMSeriesFileNames(in_dcm_dir)  # type: list # get dicom names
+    reader.SetFileNames(dicom_names)  # set dicom names to reader
+    image = reader.Execute()  # type: sitk.Image # execute reader to get sitk image
+
+    # Convert to NIfTI format
+    img_array = sitk.GetArrayFromImage(image)  # type: np.ndarray  # convert to numpy array
+    image_nifti = sitk.GetImageFromArray(img_array)  # type: sitk.Image  # convert to sitk image
+    image_nifti.SetSpacing(image.GetSpacing())  # set spacing as in original dicom
+    image_nifti.SetDirection(image.GetDirection())  # set direction as in original dicom
+    image_nifti.SetOrigin(image.GetOrigin())  # set origin as in original dicom
+
+    # Save NIfTI file
+    sitk.WriteImage(image_nifti, os.path.join(out_nii_dir, f"{out_name}.nii.gz"))  # save nifti file

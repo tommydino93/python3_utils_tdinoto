@@ -1,4 +1,6 @@
 from dateutil.parser import parse
+import json
+import os
 
 
 def is_date(input_string: str,
@@ -96,3 +98,52 @@ def str2bool(v: str) -> bool:
         return False
     else:
         raise ValueError('Boolean value expected.')
+
+
+def contains_only_digits(input_string: str) -> bool:
+    """This function checks whether the input string contains only digits
+    Args:
+        input_string: the input string
+    Returns:
+        True: if the input string contains only digits
+        False: otherwise
+    """
+    return input_string.isdigit()
+
+
+def load_json_file_as_dict(path_json_file: str) -> dict:
+    """This function loads a json file and returns its content as a dict.
+    Args:
+        path_json_file: path to json file
+    Returns:
+        content: content of json file as dict
+    """
+    with open(path_json_file, 'r') as json_file:
+        content = json.load(json_file)
+
+    return content
+
+
+def get_filename_without_extensions(file_path: str) -> str:
+    """This function returns the filename without extension from a file path
+    Args:
+        file_path: path to file
+    Returns:
+        filename_without_ext: filename without extension
+    """
+    filename = os.path.basename(file_path)  # get filename from path including extension(s)
+    filename_without_ext = filename.split('.')[0]  # get filename without extension(s)
+
+    return filename_without_ext
+
+
+def get_filename_with_extensions(file_path: str) -> str:
+    """This function returns the filename with extension(s) from a file path
+    Args:
+        file_path: path to file
+    Returns:
+        filename_with_ext: filename with extension(s)
+    """
+    filename_with_ext = os.path.basename(file_path)  # get filename from path including extension(s)
+
+    return filename_with_ext
