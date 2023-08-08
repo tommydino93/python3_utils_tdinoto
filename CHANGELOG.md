@@ -1,5 +1,11 @@
 # Changelog
-
+____________
+## v1.0.5 (Aug 08, 2023)
+### Feature
+- Added `print_distribution_sessions_bids_dataset` in `utils_bids_dcm_dataset.py`
+- Added `dcm2nii_sitk` in `utils_nifti_dicom.py`
+- Added `binarize_array` in `utils_numpy.py`
+- Added `contains_only_digits`, `load_json_file_as_dict`, `get_filename_without_extensions` and `get_filename_with_extensions` in `utils_strings.py`
 ____________
 ## v1.0.4 (Apr 28, 2023)
 ### Feature
