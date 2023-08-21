@@ -1,4 +1,5 @@
 import math
+import logging
 
 
 def round_half_up(n: float,
@@ -19,7 +20,8 @@ def round_half_up(n: float,
 
 
 def print_running_time(start_time: float,
-                       end_time: float, process_name: str) -> None:
+                       end_time: float,
+                       process_name: str) -> None:
     """This function takes as input the start and the end time of a process and prints to console the time elapsed for this process
     Args:
         start_time: instant when the timer was started
@@ -32,4 +34,24 @@ def print_running_time(start_time: float,
     temp = temp - 3600 * hours  # if hours is not zero, remove equivalent amount of seconds
     minutes = temp // 60  # compute minutes
     seconds = temp - 60 * minutes  # compute minutes
-    print('\n%s time: %d hh %d mm %d ss' % (sentence, hours, minutes, seconds))
+    print(f'\n{sentence} time: {hours} hh {minutes} mm {seconds} ss')
+
+
+def print_running_time_with_logger(start_time: float,
+                                   end_time: float,
+                                   process_name: str,
+                                   logger: logging.Logger) -> None:
+    """This function takes as input the start and the end time of a process and prints to console the time elapsed for this process
+    Args:
+        start_time: instant when the timer was started
+        end_time: instant when the timer was stopped
+        process_name: name of the process
+        logger: logger object
+    """
+    sentence = str(process_name)  # convert to string whatever the user inputs as third argument
+    temp = end_time - start_time  # compute time difference
+    hours = temp // 3600  # compute hours
+    temp = temp - 3600 * hours  # if hours is not zero, remove equivalent amount of seconds
+    minutes = temp // 60  # compute minutes
+    seconds = temp - 60 * minutes  # compute minutes
+    logger.info(f'\n{sentence} time: {hours} hh {minutes} mm {seconds} ss')
