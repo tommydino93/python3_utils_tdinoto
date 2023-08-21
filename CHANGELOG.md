@@ -1,5 +1,9 @@
 # Changelog
 ____________
+## v1.0.6 (Aug 21, 2023)
+### Feature
+- Added `print_running_time_with_logger` in `numeric.py`
+____________
 ## v1.0.5 (Aug 08, 2023)
 ### Feature
 - Added `print_distribution_sessions_bids_dataset` in `utils_bids_dcm_dataset.py`
