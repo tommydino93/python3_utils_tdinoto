@@ -320,3 +320,18 @@ def dcm2nii_sitk(in_dcm_dir: str,
 
     # Save NIfTI file
     sitk.WriteImage(image_nifti, os.path.join(out_nii_dir, f"{out_name}.nii.gz"))  # save nifti file
+
+
+def bias_field_correction_sitk(input_img_path: str,
+                               output_path: str) -> None:
+    """This function applies bias field correction to the input image using SimpleITK.
+    Args:
+        input_img_path: path to input image
+        output_path: path where the output image will be saved
+    """
+    input_img = sitk.ReadImage(input_img_path)  # read image
+    mask_img = sitk.OtsuThreshold(input_img, 0, 1, 200)  # create binary mask with Otsu method
+    input_img = sitk.Cast(input_img, sitk.sitkFloat32)  # cast to float32
+    corrector = sitk.N4BiasFieldCorrectionImageFilter()  # create corrector object
+    output = corrector.Execute(input_img, mask_img)  # apply corrector to obtain output image
+    sitk.WriteImage(output, output_path)  # save output image to output_path
