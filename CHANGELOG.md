@@ -1,5 +1,12 @@
 # Changelog
 ____________
+## v1.0.7 (Sep 06, 2023)
+### Feature
+- Added `first_argmin` in `utils_lists.py`
+- Added `bias_field_correction_sitk` in `utils_nifti_dicom.py`
+### Fix
+- Included check that list is nested in `flatten_list` inside `utils_lists.py`
+____________
 ## v1.0.6 (Aug 21, 2023)
 ### Feature
 - Added `print_running_time_with_logger` in `numeric.py`
@@ -37,7 +44,6 @@ ____________
 - Added function `str2bool` in `utils_strings.py`
 - Added CHANGELOG.md
 - Updated README.md with one example
-### Fix
 ____________
 ## v1.0.0 (Aug 15, 2022)
 - First release
