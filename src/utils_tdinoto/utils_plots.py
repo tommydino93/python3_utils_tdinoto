@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from typing import Tuple
 from sklearn.metrics import roc_curve, auc
-from utils_io import create_dir_if_not_exist
+from utils_tdinoto.utils_io import create_dir_if_not_exist
 import os
 from matplotlib.ticker import MaxNLocator
-from utils_lists import first_argmin, first_argmax
+from utils_tdinoto.utils_lists import first_argmin, first_argmax
 import torch
 
 
