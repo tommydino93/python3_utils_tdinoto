@@ -1,5 +1,9 @@
 # Changelog
 ____________
+## v1.0.8 (Sep 06, 2023)
+### Fix
+- Modified imports from relative to absolute in `utils_plots.py`
+____________
 ## v1.0.7 (Sep 06, 2023)
 ### Feature
 - Added `first_argmin` in `utils_lists.py`
