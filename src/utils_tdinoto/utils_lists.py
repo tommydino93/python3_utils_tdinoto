@@ -5,6 +5,7 @@ import glob
 import random
 from typing import Any, Tuple
 import operator
+import warnings
 
 
 def save_list_to_disk_with_pickle(list_to_save: list,
@@ -97,9 +98,12 @@ def flatten_list(list_of_lists: list) -> list:
     Returns:
         flattened_list: flattened list
     """
-    flattened_list = [item for sublist in list_of_lists for item in sublist]
-
-    return flattened_list
+    if list_is_nested(list_of_lists):
+        flattened_list = [item for sublist in list_of_lists for item in sublist]
+        return flattened_list
+    else:
+        warnings.warn("List is already flat, returning the same list")
+        return list_of_lists
 
 
 def find_difference_list(list1: list,
@@ -218,6 +222,19 @@ def first_argmax(input_list: list) -> int:
     idx_max = input_list.index(max(input_list))
 
     return idx_max
+
+
+def first_argmin(input_list: list) -> int:
+    """This function returns the index of the min value. If there are duplicate min values in input_list,
+    the index of the first min value found will be returned.
+    Args:
+        input_list: list for which we want to find the argmax
+    Returns:
+        idx_min: index corresponding to the minimum value
+    """
+    idx_min = input_list.index(min(input_list))
+
+    return idx_min
 
 
 def shuffle_two_lists_with_same_order(x: list,
