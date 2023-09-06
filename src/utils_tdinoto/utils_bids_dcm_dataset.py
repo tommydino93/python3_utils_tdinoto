@@ -7,7 +7,6 @@ import SimpleITK as sitk
 import pandas as pd
 from tqdm import tqdm
 from utils_tdinoto.numeric import round_half_up
-from utils_tdinoto.utils_lists import extract_unique_elements
 
 
 def print_patient_sex_and_age(bids_dir: str,
