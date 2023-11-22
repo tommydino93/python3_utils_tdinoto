@@ -34,7 +34,7 @@ def print_running_time(start_time: float,
     temp = temp - 3600 * hours  # if hours is not zero, remove equivalent amount of seconds
     minutes = temp // 60  # compute minutes
     seconds = temp - 60 * minutes  # compute minutes
-    print(f'\n{sentence} time: {hours} hh {minutes} mm {seconds} ss')
+    print(f'\n{sentence} time: {hours:.0f} hh {minutes:.0f} mm {seconds:.0f} ss')
 
 
 def print_running_time_with_logger(start_time: float,
@@ -54,4 +54,4 @@ def print_running_time_with_logger(start_time: float,
     temp = temp - 3600 * hours  # if hours is not zero, remove equivalent amount of seconds
     minutes = temp // 60  # compute minutes
     seconds = temp - 60 * minutes  # compute minutes
-    logger.info(f'\n{sentence} time: {hours} hh {minutes} mm {seconds} ss')
+    logger.info(f'\n{sentence} time: {hours:.0f} hh {minutes:.0f} mm {seconds:.0f} ss')
