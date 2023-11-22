@@ -18,7 +18,7 @@ def find_most_frequent_value(input_array: np.ndarray) -> Any:
 
 
 def has_nans(input_array: np.ndarray) -> bool:
-    """"This function checks whether the input array contains any nan.
+    """This function checks whether the input array contains any nan.
     If yes, it returns True, otherwise it returns False.
     Args:
         input_array: input array where we check for nans

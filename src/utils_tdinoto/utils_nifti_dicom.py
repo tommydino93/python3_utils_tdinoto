@@ -298,13 +298,18 @@ def change_dcm_tags_one_derived_image(ds: pydicom.dataset.FileDataset,
 
 def dcm2nii_sitk(in_dcm_dir: str,
                  out_nii_dir: str,
-                 out_name: str) -> None:
+                 out_name: str) -> bool:
     """This function converts a DICOM sequence to a NIfTI file using SimpleITK.
     Args:
         in_dcm_dir: input directory containing the DICOM sequence
         out_nii_dir: output directory where the NIfTI file will be saved
         out_name: name of the NIfTI file
+    Returns:
+        conversion_ok: whether the conversion was successful or not
     """
+    # initialize conversion_ok to False; if the conversion is successful, it will be set to True
+    conversion_ok = False
+
     # Load DICOM sequence
     reader = sitk.ImageSeriesReader()  # type: sitk.ImageSeriesReader # create reader
     dicom_names = reader.GetGDCMSeriesFileNames(in_dcm_dir)  # type: list # get dicom names
@@ -315,11 +320,16 @@ def dcm2nii_sitk(in_dcm_dir: str,
     img_array = sitk.GetArrayFromImage(image)  # type: np.ndarray  # convert to numpy array
     image_nifti = sitk.GetImageFromArray(img_array)  # type: sitk.Image  # convert to sitk image
     image_nifti.SetSpacing(image.GetSpacing())  # set spacing as in original dicom
-    image_nifti.SetDirection(image.GetDirection())  # set direction as in original dicom
-    image_nifti.SetOrigin(image.GetOrigin())  # set origin as in original dicom
+    if len(image.GetDirection()) == len(image_nifti.GetDirection()):
+        image_nifti.SetDirection(image.GetDirection())  # set direction as in original dicom
+        image_nifti.SetOrigin(image.GetOrigin())  # set origin as in original dicom
 
-    # Save NIfTI file
-    sitk.WriteImage(image_nifti, os.path.join(out_nii_dir, f"{out_name}.nii.gz"))  # save nifti file
+        # Save NIfTI file
+        sitk.WriteImage(image_nifti, os.path.join(out_nii_dir, f"{out_name}.nii.gz"))  # save nifti file
+
+        conversion_ok = True
+
+    return conversion_ok
 
 
 def bias_field_correction_sitk(input_img_path: str,

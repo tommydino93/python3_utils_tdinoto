@@ -1,5 +1,13 @@
 # Changelog
 ____________
+## v1.0.9 (Nov 22, 2023)
+### Fix
+- Modified floating point precision in `numeric.py`
+- Modified `dcm2nii_sitk` in `utils_nifti_dicom.py`
+- Corrected typo in `utils_numpy.py`
+### Feature
+- Added `convert_age_str2int` in `utils_bids_dcm_dataset.py`
+____________
 ## v1.0.8 (Sep 06, 2023)
 ### Fix
 - Modified imports from relative to absolute in `utils_plots.py`

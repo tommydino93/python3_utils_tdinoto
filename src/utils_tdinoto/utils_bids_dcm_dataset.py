@@ -163,6 +163,28 @@ def print_distribution_sessions_bids_dataset(path_bids_ds: str) -> None:
         print(f"Subjects with {nb_ses} ses: {count}")
 
 
+def convert_age_str2int(age_str: str) -> int:
+    """This function converts the age from string to int. It is used when for instance
+    the PatientAge dicom attribute is in the format "075Y"
+    Example:
+        age_str = "075Y"
+        age_int = convert_age_str2int(age_str)
+        print(age_int)  # prints "75
+    Args:
+        age_str: age in string format
+    Returns:
+        age_int: age in int format if age_str is a string; otherwise, age_int is equal to age_str and a warning is printed
+    """
+    # check that age is a string
+    if isinstance(age_str, str):
+        age_int = int(keep_only_digits(age_str))
+    else:
+        age_int = age_str
+        print("\nWARNING: age is not a string; leave value unchanged")
+
+    return age_int
+
+
 def main():
     # input args
     path_bids_ds = "/path/to/BIDS_Dataset/"
