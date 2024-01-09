@@ -1,5 +1,11 @@
 # Changelog
 ____________
+## v1.0.10 (Jan 09, 2023)
+### Fix
+- Modified `extract_unique_elements` in `utils_lists.py` to cope with list of lists
+### Feature
+- Added `extract_filename_from_nifti_path` in `utils_nifti_dicom.py`
+____________
 ## v1.0.9 (Nov 22, 2023)
 ### Fix
 - Modified floating point precision in `numeric.py`
