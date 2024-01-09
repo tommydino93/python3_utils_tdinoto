@@ -345,3 +345,17 @@ def bias_field_correction_sitk(input_img_path: str,
     corrector = sitk.N4BiasFieldCorrectionImageFilter()  # create corrector object
     output = corrector.Execute(input_img, mask_img)  # apply corrector to obtain output image
     sitk.WriteImage(output, output_path)  # save output image to output_path
+
+
+def extract_filename_from_nifti_path(in_nifti_path: str) -> str:
+    """This function extracts the filename of a nifti file from its path, regardless
+    of the extension which can be either .nii or .nii.gz
+    Args:
+        in_nifti_path: path to nifti file
+    Returns:
+        filename: filename of nifti file
+    """
+    filename = os.path.splitext(os.path.splitext(os.path.basename(in_nifti_path))[0])[0]
+
+    return filename
+

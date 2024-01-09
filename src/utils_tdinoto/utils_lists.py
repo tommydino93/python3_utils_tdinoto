@@ -7,6 +7,8 @@ from typing import Any, Tuple
 import operator
 import warnings
 
+import numpy as np
+
 
 def save_list_to_disk_with_pickle(list_to_save: list,
                                   out_dir: str,
@@ -154,16 +156,23 @@ def find_indexes_where_lists_differ(list1: list,
 
 
 def extract_unique_elements(lst: list,
-                            ordered: bool = True) -> list:
+                            ordered: bool) -> list:
     """This function extracts the unique elements of the input list (i.e. it removes duplicates)
-    and returns them as an output list; if ordered=True (as by default), the returned list is ordered.
+    and returns them as an output list; if ordered=True, the returned list is ordered.
     Args:
         lst: input list from which we want to extract the unique elements
-        ordered: whether the output list of unique values is sorted or not; True by default
+        ordered: whether the output list of unique values is sorted or not
     Returns:
         out_list: list containing unique values
     """
-    out_list = list(set(lst))  # type: list
+    def is_list_of_lists(arg):
+        return isinstance(arg, list) and all(isinstance(sublist, list) for sublist in arg)
+
+    if is_list_of_lists(lst):
+        out_list = list(np.unique(lst, axis=0))
+    else:
+        # if instead it's not a list of lists
+        out_list = list(set(lst))  # type: list
 
     if ordered:  # if we want to sort the list of unique values
         out_list.sort()  # type: list
