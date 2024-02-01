@@ -1,6 +1,12 @@
 # Changelog
 ____________
-## v1.0.10 (Jan 09, 2023)
+## v1.0.11 (Feb 01, 2024)
+### Fix
+- Modified `find_common_elements` in `utils_lists.py`
+### Feature
+- Added `arrays_are_identical` in `utils_numpy.py`
+____________
+## v1.0.10 (Jan 09, 2024)
 ### Fix
 - Modified `extract_unique_elements` in `utils_lists.py` to cope with list of lists
 ### Feature
