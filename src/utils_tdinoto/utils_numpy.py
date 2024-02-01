@@ -157,3 +157,22 @@ def binarize_array(input_array: np.ndarray,
     binarized_array = (input_array >= threshold).astype(int)
 
     return binarized_array
+
+
+def arrays_are_identical(arr_np1: np.ndarray,
+                         arr_np2: np.ndarray) -> bool:
+    """Check whether two NumPy arrays are exactly identical.
+    Args:
+        arr_np1: The first NumPy array.
+        arr_np2: The second NumPy array.
+    Returns:
+        are_identical: True if the two arrays are identical, False otherwise.
+    """
+    # Check if shapes are equal
+    if arr_np1.shape != arr_np2.shape:
+        raise ValueError(f"Shapes are different. arr_np1.shape = {arr_np1.shape}, arr_np2.shape = {arr_np2.shape}")
+
+    # Check if elements are equal
+    are_identical = np.array_equal(arr_np1, arr_np2)
+
+    return are_identical

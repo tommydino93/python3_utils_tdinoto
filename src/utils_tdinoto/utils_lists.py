@@ -6,7 +6,6 @@ import random
 from typing import Any, Tuple
 import operator
 import warnings
-
 import numpy as np
 
 
@@ -71,8 +70,14 @@ def find_common_elements(list1: list,
     Returns:
         intersection_as_list: list containing the common elements between the two input lists
     """
-    list1_as_set = set(list1)  # type: set
-    intersection = list1_as_set.intersection(list2)  # type: set
+    if is_list_of_lists(list1) and is_list_of_lists(list2):
+        list1_as_set = set(tuple(sublist) for sublist in list1)  # type: set
+        list2_as_set = set(tuple(sublist) for sublist in list2)  # type: set
+    else:
+        list1_as_set = set(list1)  # type: set
+        list2_as_set = set(list2)  # type: set
+
+    intersection = list1_as_set.intersection(list2_as_set)  # type: set
     intersection_as_list = list(intersection)  # type: list
 
     return intersection_as_list
@@ -155,6 +160,16 @@ def find_indexes_where_lists_differ(list1: list,
     return out_list
 
 
+def is_list_of_lists(arg):
+    """This function checks whether the input argument is a list of lists
+    Args:
+        arg: input argument
+    Returns:
+        bool: True if arg is a list of lists; False otherwise
+    """
+    return isinstance(arg, list) and all(isinstance(sublist, list) for sublist in arg)
+
+
 def extract_unique_elements(lst: list,
                             ordered: bool) -> list:
     """This function extracts the unique elements of the input list (i.e. it removes duplicates)
@@ -165,11 +180,9 @@ def extract_unique_elements(lst: list,
     Returns:
         out_list: list containing unique values
     """
-    def is_list_of_lists(arg):
-        return isinstance(arg, list) and all(isinstance(sublist, list) for sublist in arg)
-
     if is_list_of_lists(lst):
         out_list = list(np.unique(lst, axis=0))
+        out_list = [list(elem) for elem in out_list]  # convert to list of lists
     else:
         # if instead it's not a list of lists
         out_list = list(set(lst))  # type: list
@@ -312,7 +325,7 @@ def keep_only_duplicates(input_list: list) -> list:
         [2,3]
     """
     counts = Counter(input_list)
-    list_only_with_duplicates = [id for id in counts if counts[id] > 1]
+    list_only_with_duplicates = [i for i in counts if counts[i] > 1]
 
     return list_only_with_duplicates
 
