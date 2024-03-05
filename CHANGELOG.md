@@ -1,5 +1,9 @@
 # Changelog
 ____________
+## v1.0.12 (Mar 05, 2024)
+### Feature
+- Added `extract_age_from_dcm_attribute` in `utils_nifti_dicom.py`
+____________
 ## v1.0.11 (Feb 01, 2024)
 ### Fix
 - Modified `find_common_elements` in `utils_lists.py`

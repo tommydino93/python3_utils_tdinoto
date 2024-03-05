@@ -5,6 +5,7 @@ from typing import Tuple
 import numpy as np
 import pydicom
 from datetime import datetime
+from utils_tdinoto.utils_strings import keep_only_digits
 
 
 def resample_volume(volume_path: str,
@@ -359,3 +360,16 @@ def extract_filename_from_nifti_path(in_nifti_path: str) -> str:
 
     return filename
 
+
+def extract_age_from_dcm_attribute(age: str) -> int:
+    """This function returns the age as an integer from the DICOM attribute PatientAge
+    Args:
+        age: age as a string
+    Returns:
+        age_int: age as an integer
+    """
+    age = keep_only_digits(age)  # keep only the digits
+    age = age.lstrip("0")  # remove leading zeros; l = left
+    age_int = int(age)  # convert to integer
+
+    return age_int
