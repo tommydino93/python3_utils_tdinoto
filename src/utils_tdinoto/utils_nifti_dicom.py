@@ -308,6 +308,8 @@ def dcm2nii_sitk(in_dcm_dir: str,
     Returns:
         conversion_ok: whether the conversion was successful or not
     """
+    assert os.path.exists(in_dcm_dir), f"ERROR: {in_dcm_dir} does not exist"
+
     # initialize conversion_ok to False; if the conversion is successful, it will be set to True
     conversion_ok = False
 
@@ -315,22 +317,14 @@ def dcm2nii_sitk(in_dcm_dir: str,
     reader = sitk.ImageSeriesReader()  # type: sitk.ImageSeriesReader # create reader
     dicom_names = reader.GetGDCMSeriesFileNames(in_dcm_dir)  # type: list # get dicom names
     reader.SetFileNames(dicom_names)  # set dicom names to reader
-    image = reader.Execute()  # type: sitk.Image # execute reader to get sitk image
-
-    # Convert to NIfTI format
-    img_array = sitk.GetArrayFromImage(image)  # type: np.ndarray  # convert to numpy array
-    image_nifti = sitk.GetImageFromArray(img_array)  # type: sitk.Image  # convert to sitk image
-    image_nifti.SetSpacing(image.GetSpacing())  # set spacing as in original dicom
-    if len(image.GetDirection()) == len(image_nifti.GetDirection()):
-        image_nifti.SetDirection(image.GetDirection())  # set direction as in original dicom
-        image_nifti.SetOrigin(image.GetOrigin())  # set origin as in original dicom
-
-        # Save NIfTI file
-        sitk.WriteImage(image_nifti, os.path.join(out_nii_dir, f"{out_name}.nii.gz"))  # save nifti file
-
+    try:
+        image = reader.Execute()  # type: sitk.Image # execute reader to get sitk image
+        sitk.WriteImage(image, os.path.join(out_nii_dir, f"{out_name}.nii.gz"))
         conversion_ok = True
-
-    return conversion_ok
+        return conversion_ok
+    except Exception as e:
+        print(f"ERROR: {e}")
+        return conversion_ok
 
 
 def bias_field_correction_sitk(input_img_path: str,

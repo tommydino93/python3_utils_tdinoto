@@ -1,5 +1,9 @@
 # Changelog
 ____________
+## v1.0.13 (Mar 08, 2024)
+### Fix
+- Updated `dcm2nii_sitk` in `utils_nifti_dicom.py`
+____________
 ## v1.0.12 (Mar 05, 2024)
 ### Feature
 - Added `extract_age_from_dcm_attribute` in `utils_nifti_dicom.py`
